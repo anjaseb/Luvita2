@@ -1,0 +1,311 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Pesquisar Usuários</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+            background: #00373D;
+        }
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        h2 {
+            font-family: Times New Roman;
+            font-size: 17px;
+            color: #FFFFFF;
+            background: rgba(255,255,255,0.1);
+            border-radius: 50%;
+            text-align: center;
+        }
+        .user-card {
+            display: flex;
+            align-items: center;
+            background: #fff;
+            padding: 10px;
+            margin-bottom: 20px;
+            border-radius: 100px;
+            cursor: pointer;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+
+        .user-card img {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            margin-right: 15px;
+        }
+
+        .user-card span {
+            font-weight: bold;
+            display: block;
+        }
+
+        .user-card small {
+            margin-top: -40px;
+            display: block;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 3px;
+        }
+        .user-card:hover {
+            background: #f0f0f0;
+        }
+
+        #searchInput {
+            border-radius: 10px;
+            border: 1px solid #00E2FF;
+            padding: 8px;
+            width: 100%;
+            box-sizing: border-box;
+        }
+        .bolhas span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            bottom: -150px;
+            border-radius: 50%;
+            animation: subir 20s linear infinite;
+        }
+
+        .bolhas span:nth-child(1) {
+            left: 10%;
+            animation-duration: 15s;
+        }
+        .bolhas span:nth-child(2) {
+            left: 20%;
+            width: 25px;
+            height: 25px;
+            animation-duration: 12s;
+        }
+        .bolhas span:nth-child(3) {
+            left: 35%;
+            animation-duration: 18s;
+        }
+        .bolhas span:nth-child(4) {
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            animation-duration: 14s;
+        }
+        .bolhas span:nth-child(5) {
+            left: 65%;
+            animation-duration: 16s;
+        }
+        .bolhas span:nth-child(6) {
+            left: 75%;
+            width: 22px;
+            height: 22px;
+            animation-duration: 13s;
+        }
+        .bolhas span:nth-child(7) {
+            left: 85%;
+            animation-duration: 19s;
+        }
+        .bolhas span:nth-child(8) {
+            left: 95%;
+            width: 18px;
+            height: 18px;
+            animation-duration: 17s;
+        }
+        .bolhas span:nth-child(9) {
+            left: 5%;
+            animation-duration: 15s;
+        }
+        .bolhas span:nth-child(10) {
+            left: 40%;
+            width: 24px;
+            height: 24px;
+            animation-duration: 20s;
+        }
+
+@keyframes subir {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1200px);
+                opacity: 0;
+            }
+        }
+        .menu-wrapper {
+            position: relative;
+            display: inline-block;
+            float: right;
+            margin: 10px;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .menu-opcoes {
+            display: none;
+            position: absolute;
+            top: 40px;
+            right: -50px;
+            background: #004762;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            min-width: 90px;
+            overflow: hidden;
+        }
+
+        .menu-opcoes a {
+            display: block;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #003;
+        }
+
+        .menu-opcoes a:hover {
+            background-color: #004762;
+        }
+        .footer {
+            margin-top: 130%;
+            text-align: left;
+            font-size: 0.7em;
+            color: #cccccc;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-wrapper">
+        <button class="menu-btn" onclick="toggleMenu()">⋮</button>
+        <div class="menu-opcoes" id="menuOpcoes">
+            <a href="perfil1.html">Inicial</a>
+
+            <a href="chat.html">Chat</a>
+
+        </div>
+    </div>
+    <div class="bolhas">
+        <span></span><span></span><span></span><span></span><span></span>
+        <span></span><span></span><span></span><span></span><span></span>
+    </div>
+    <h2>Pesquisar Usuários</h2>
+    <input type="text" id="searchInput" placeholder="Digite o nome do usuário..." />
+</div>
+<div id="results">
+    <div class="footer">
+        &copy; 2025 LuVita. Todos os direitos reservados(António).
+    </div>
+
+    <!-- Firebase SDKs -->
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+    <script>
+        // Configuração do Firebase
+        const firebaseConfig = {
+            apiKey: "AIzaSyBCIpRTaApxYi_oXS3cjhmey8ZOJOJcHQg",
+            authDomain: "luvita-b6d67.firebaseapp.com",
+            databaseURL: "https://luvita-b6d67-default-rtdb.firebaseio.com",
+            projectId: "luvita-b6d67",
+            storageBucket: "luvita-b6d67.appspot.com",
+            messagingSenderId: "850286171627",
+            appId: "1:850286171627:web:052b6e26b22e678a47b5ae",
+            measurementId: "G-Q9J088RFDK"
+        };
+
+        // Inicializar o Firebase
+        firebase.initializeApp(firebaseConfig);
+        const database = firebase.database();
+
+        // Exibir resultados
+        function displayResults(users) {
+            const resultsDiv = document.getElementById('results');
+            resultsDiv.innerHTML = '';
+
+            users.forEach(user => {
+                const userCard = document.createElement('div');
+                userCard.className = 'user-card';
+
+                const foto = document.createElement('img');
+                foto.src = user.fotoURL || 'default.jpg';
+                foto.className = 'foto-resultado';
+                foto.alt = `Foto de ${user.nome}`;
+
+                const nome = document.createElement('span');
+                nome.textContent = user.nome;
+                // NOVO: Mostrar o país acima do nome
+                const pais = document.createElement('small');
+                pais.textContent = `País: ${user.pais || "Não informado"}`;
+                pais.style.display = "block";
+                pais.style.fontSize = "12px";
+                pais.style.color = "#666";
+
+
+                userCard.appendChild(foto);
+                userCard.appendChild(pais);
+                userCard.appendChild(nome);
+
+                userCard.onclick = () => {
+                    localStorage.setItem("perfilUsuario", user.id);
+                    window.location.href = "perfil2.html";
+                };
+                resultsDiv.appendChild(userCard);
+            });
+        }
+
+        // Função de busca
+        function searchUsers(query) {
+            database.ref('usuarios').once('value').then(snapshot => {
+                const usersData = snapshot.val();
+                const users = [];
+
+                for (let id in usersData) {
+                    const user = usersData[id];
+                    if (user.nome && user.nome.toLowerCase().includes(query.toLowerCase())) {
+                        users.push({
+                            id, ...user
+                        });
+                    }
+                }
+
+                displayResults(users);
+            });
+        }
+
+        // Ativar busca
+        document.getElementById('searchInput').addEventListener('input', () => {
+            const query = document.getElementById('searchInput').value.trim();
+            if (query.length > 0) {
+                searchUsers(query);
+            } else {
+                document.getElementById('results').innerHTML = '';
+            }
+        });
+
+    </script>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("menuOpcoes");
+            menu.style.display = (menu.style.display === "block") ? "none": "block";
+        }
+
+        // Fecha o menu se clicar fora
+        document.addEventListener('click', function(event) {
+            const isClickInside = document.querySelector('.menu-wrapper').contains(event.target);
+            if (!isClickInside) {
+                document.getElementById("menuOpcoes").style.display = "none";
+            }
+        });
+    </script>
+</body>
+</html>

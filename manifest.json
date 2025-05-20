@@ -1,0 +1,15 @@
+{
+  "name": "LuVita lite",
+  "short_name": "LuVita lite",
+  "start_url": "inicio.html",
+  "display": "standalone",
+  "background_color": "#032B00",
+  "theme_color": "#000573",
+  "icons": [
+    {
+      "src": "9.png",
+      "sizes": "80x80",
+      "type": "image/png"
+    }
+  ]
+}

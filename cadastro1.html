@@ -1,0 +1,520 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Cadastro - Luvita</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+    
+            padding: 8px;
+             background: linear-gradient(200deg,#001D43, #003175);
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+        .container a {
+            text-decoration: none;
+        }
+        .container {
+            max-width: auto;
+            margin: auto;
+            background: white;
+            padding: 35px;
+            border-radius: 40px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        input, button {
+            width: 100%;
+            margin: 10px 0;
+            padding: 10px;
+            border-radius: 4px;
+            border: 1px solid #ccc;
+        }
+        button {
+            background-color: #005E6D;
+            color: white;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        h2 {
+            text-align: center;
+            color: #005E6D;
+        }
+
+        .spinner {
+            display: none;
+            border: 4px solid #eee;
+            border-top: 4px solid #4caf50;
+            border-radius: 50%;
+            width: 24px;
+            height: 24px;
+            animation: spin 1s linear infinite;
+            position: absolute;
+            right: 15px;
+            top: 15px;
+        }
+@keyframes spin {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        .erro {
+            color: red;
+            font-size: 14px;
+        }
+
+        .buttons {
+            margin-top: 40px;
+            display: flex;
+            gap: 20px;
+            justify-content: center;
+        }
+
+        .buttons a {
+            text-decoration: none;
+            padding: 8px 8px;
+            background: linear-gradient(270deg,#004762,#000651);
+            color: #FFFFFF;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: background-color 0.3s ease;
+        }
+
+        .buttons a:hover {
+            background-color: #00cc94;
+        }
+        .se a {
+            text-decoration: none;
+            top: 3px;
+        }
+
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 0.7em;
+            color: #cccccc;
+        }
+
+        .bolhas span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            bottom: -150px;
+            border-radius: 50%;
+            animation: subir 20s linear infinite;
+        }
+
+        .bolhas span:nth-child(1) {
+            left: 10%;
+            animation-duration: 15s;
+        }
+        .bolhas span:nth-child(2) {
+            left: 20%;
+            width: 25px;
+            height: 25px;
+            animation-duration: 12s;
+        }
+        .bolhas span:nth-child(3) {
+            left: 35%;
+            animation-duration: 18s;
+        }
+        .bolhas span:nth-child(4) {
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            animation-duration: 14s;
+        }
+        .bolhas span:nth-child(5) {
+            left: 65%;
+            animation-duration: 16s;
+        }
+        .bolhas span:nth-child(6) {
+            left: 75%;
+            width: 22px;
+            height: 22px;
+            animation-duration: 13s;
+        }
+        .bolhas span:nth-child(7) {
+            left: 85%;
+            animation-duration: 19s;
+        }
+        .bolhas span:nth-child(8) {
+            left: 95%;
+            width: 18px;
+            height: 18px;
+            animation-duration: 17s;
+        }
+        .bolhas span:nth-child(9) {
+            left: 5%;
+            animation-duration: 15s;
+        }
+        .bolhas span:nth-child(10) {
+            left: 40%;
+            width: 24px;
+            height: 24px;
+            animation-duration: 20s;
+        }
+
+@keyframes subir {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1200px);
+                opacity: 0;
+            }
+        }
+
+
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2><a href="cadastro1.html">Criar conta</a></h2>
+        <input type="text" id="nome" placeholder="Nome completo">
+        <input type="email" id="email" placeholder="E-mail">
+        <input type="file" id="foto" accept="image/*" />
+       <select id="pais">
+  <option value="">Selecione seu país</option>
+<option value="Afeganistão">Afeganistão</option>
+<option value="África do Sul">África do Sul</option>
+<option value="Albânia">Albânia</option>
+<option value="Alemanha">Alemanha</option>
+<option value="Andorra">Andorra</option>
+<option value="Angola">Angola</option>
+<option value="Antígua e Barbuda">Antígua e Barbuda</option>
+<option value="Arábia Saudita">Arábia Saudita</option>
+<option value="Argélia">Argélia</option>
+<option value="Argentina">Argentina</option>
+<option value="Armênia">Armênia</option>
+<option value="Austrália">Austrália</option>
+<option value="Áustria">Áustria</option>
+<option value="Azerbaijão">Azerbaijão</option>
+<option value="Bahamas">Bahamas</option>
+<option value="Bangladesh">Bangladesh</option>
+<option value="Barbados">Barbados</option>
+<option value="Barein">Barein</option>
+<option value="Bélgica">Bélgica</option>
+<option value="Belize">Belize</option>
+<option value="Benim">Benim</option>
+<option value="Bermudas">Bermudas</option>
+<option value="Bielorrússia">Bielorrússia</option>
+<option value="Bolívia">Bolívia</option>
+<option value="Bósnia e Herzegovina">Bósnia e Herzegovina</option>
+<option value="Botswana">Botswana</option>
+<option value="Brasil">Brasil</option>
+<option value="Brunei">Brunei</option>
+<option value="Bulgária">Bulgária</option>
+<option value="Burkina Faso">Burkina Faso</option>
+<option value="Burundi">Burundi</option>
+<option value="Butão">Butão</option>
+<option value="Bélgica">Bélgica</option>
+<option value="Cabo Verde">Cabo Verde</option>
+<option value="Camarões">Camarões</option>
+<option value="Camboja">Camboja</option>
+<option value="Canadá">Canadá</option>
+<option value="Catar">Catar</option>
+<option value="Cazaquistão">Cazaquistão</option>
+<option value="Chade">Chade</option>
+<option value="Chile">Chile</option>
+<option value="China">China</option>
+<option value="Chipre">Chipre</option>
+<option value="Colômbia">Colômbia</option>
+<option value="Comores">Comores</option>
+<option value="Congo">Congo</option>
+<option value="Coreia do Norte">Coreia do Norte</option>
+<option value="Coreia do Sul">Coreia do Sul</option>
+<option value="Costa do Marfim">Costa do Marfim</option>
+<option value="Costa Rica">Costa Rica</option>
+<option value="Croácia">Croácia</option>
+<option value="Cuba">Cuba</option>
+<option value="Curaçau">Curaçau</option>
+<option value="Chipre">Chipre</option>
+<option value="Dinamarca">Dinamarca</option>
+<option value="Djibuti">Djibuti</option>
+<option value="Dominica">Dominica</option>
+<option value="Egito">Egito</option>
+<option value="El Salvador">El Salvador</option>
+<option value="Emirados Árabes Unidos">Emirados Árabes Unidos</option>
+<option value="Equador">Equador</option>
+<option value="Eritreia">Eritreia</option>
+<option value="Eslováquia">Eslováquia</option>
+<option value="Eslovênia">Eslovênia</option>
+<option value="Espanha">Espanha</option>
+<option value="Eswatini">Eswatini</option>
+<option value="Estados Unidos">Estados Unidos</option>
+<option value="Estônia">Estônia</option>
+<option value="Etiópia">Etiópia</option>
+<option value="Fiji">Fiji</option>
+<option value="Filipinas">Filipinas</option>
+<option value="Finlândia">Finlândia</option>
+<option value="França">França</option>
+<option value="Gabão">Gabão</option>
+<option value="Gambia">Gambia</option>
+<option value="Gana">Gana</option>
+<option value="Gibraltar">Gibraltar</option>
+<option value="Granada">Granada</option>
+<option value="Grécia">Grécia</option>
+<option value="Guadalupe">Guadalupe</option>
+<option value="Guam">Guam</option>
+<option value="Guatemala">Guatemala</option>
+<option value="Guiana">Guiana</option>
+<option value="Guiné">Guiné</option>
+<option value="Guiné-Bissau">Guiné-Bissau</option>
+<option value="Gurgaon">Gurgaon</option>
+<option value="Haiti">Haiti</option>
+<option value="Honduras">Honduras</option>
+<option value="Hong Kong">Hong Kong</option>
+<option value="Hungria">Hungria</option>
+<option value="Iémen">Iémen</option>
+<option value="Ilhas Cayman">Ilhas Cayman</option>
+<option value="Ilhas Malvinas">Ilhas Malvinas</option>
+<option value="Ilhas Salomão">Ilhas Salomão</option>
+<option value="Ilhas Virgens">Ilhas Virgens</option>
+<option value="Índia">Índia</option>
+<option value="Indonésia">Indonésia</option>
+<option value="Irã">Irã</option>
+<option value="Iraque">Iraque</option>
+<option value="Irlanda">Irlanda</option>
+<option value="Islândia">Islândia</option>
+<option value="Israel">Israel</option>
+<option value="Itália">Itália</option>
+<option value="Jamaica">Jamaica</option>
+<option value="Japão">Japão</option>
+<option value="Jordânia">Jordânia</option>
+<option value="Kiribati">Kiribati</option>
+<option value="Kosovo">Kosovo</option>
+<option value="Kuwait">Kuwait</option>
+<option value="Laos">Laos</option>
+<option value="Lesoto">Lesoto</option>
+<option value="Letônia">Letônia</option>
+<option value="Líbano">Líbano</option>
+<option value="Libéria">Libéria</option>
+<option value="Líbia">Líbia</option>
+<option value="Liechtenstein">Liechtenstein</option>
+<option value="Lituânia">Lituânia</option>
+<option value="Luxemburgo">Luxemburgo</option>
+<option value="Macedônia do Norte">Macedônia do Norte</option>
+<option value="Madagáscar">Madagáscar</option>
+<option value="Malásia">Malásia</option>
+<option value="Malawi">Malawi</option>
+<option value="Maldivas">Maldivas</option>
+<option value="Mali">Mali</option>
+<option value="Malta">Malta</option>
+<option value="Marrocos">Marrocos</option>
+<option value="Maurício">Maurício</option>
+<option value="Mauritânia">Mauritânia</option>
+<option value="México">México</option>
+<option value="Micronésia">Micronésia</option>
+<option value="Moçambique">Moçambique</option>
+<option value="Moldávia">Moldávia</option>
+<option value="Mônaco">Mônaco</option>
+<option value="Montenegro">Montenegro</option>
+<option value="Namíbia">Namíbia</option>
+<option value="Nauru">Nauru</option>
+<option value="Nepal">Nepal</option>
+<option value="Nicarágua">Nicarágua</option>
+<option value="Níger">Níger</option>
+<option value="Nigéria">Nigéria</option>
+<option value="Noruega">Noruega</option>
+<option value="Nova Zelândia">Nova Zelândia</option>
+<option value="Omã">Omã</option>
+<option value="Países Baixos">Países Baixos</option>
+<option value="Palau">Palau</option>
+<option value="Panamá">Panamá</option>
+<option value="Papua-Nova Guiné">Papua-Nova Guiné</option>
+<option value="Paraguai">Paraguai</option>
+<option value="Peru">Peru</option>
+<option value="Polônia">Polônia</option>
+<option value="Portugal">Portugal</option>
+<option value="Quênia">Quênia</option>
+<option value="Quirguistão">Quirguistão</option>
+<option value="Reino Unido">Reino Unido</option>
+<option value="República Centro-Africana">República Centro-Africana</option>
+<option value="República Checa">República Checa</option>
+<option value="República do Congo">República do Congo</option>
+<option value="República Dominicana">República Dominicana</option>
+<option value="Ruanda">Ruanda</option>
+<option value="Romênia">Romênia</option>
+<option value="Rússia">Rússia</option>
+<option value="São Cristóvão e Nevis">São Cristóvão e Nevis</option>
+<option value="São Marino">São Marino</option>
+<option value="São Tomé e Príncipe">São Tomé e Príncipe</option>
+<option value="Senegal">Senegal</option>
+<option value="Serra Leoa">Serra Leoa</option>
+<option value="Seychelles">Seychelles</option>
+<option value="Singapura">Singapura</option>
+<option value="Síria">Síria</option>
+<option value="Somália">Somália</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="Suriname">Suriname</option>
+<option value="Suazilândia">Suazilândia</option>
+<option value="Sudão">Sudão</option>
+<option value="Sudão do Sul">Sudão do Sul</option>
+<option value="Suécia">Suécia</option>
+<option value="Suíça">Suíça</option>
+<option value="Sri Lanka">Sri Lanka</option>
+<option value="Svalbard e Jan Mayen">Svalbard e Jan Mayen</option>
+<option value="São Vicente e Granadinas">São Vicente e Granadinas</option>
+<option value="Tailândia">Tailândia</option>
+<option value="Taiwan">Taiwan</option>
+<option value="Tajiquistão">Tajiquistão</option>
+<option value="Tanzânia">Tanzânia</option>
+<option value="Togo">Togo</option>
+<option value="Tokelau">Tokelau</option>
+<option value="Tonga">Tonga</option>
+<option value="Trinidad e Tobago">Trinidad e Tobago</option>
+<option value="Tunísia">Tunísia</option>
+<option value="Turcomenistão">Turcomenistão</option>
+<option value="Turquia">Turquia</option>
+<option value="Tuvalu">Tuvalu</option>
+<option value="Uganda">Uganda</option>
+<option value="Uruguai">Uruguai</option>
+<option value="Uzbequistão">Uzbequistão</option>
+<option value="Vanuatu">Vanuatu</option>
+<option value="Vaticano">Vaticano</option>
+<option value="Venezuela">Venezuela</option>
+<option value="Vietnã">Vietnã</option>
+<option value="Wallis e Futuna">Wallis e Futuna</option>
+<option value="Iémen">Iémen</option>
+<option value="Zâmbia">Zâmbia</option>
+<option value="Zimbábue">Zimbábue</option>
+
+</select>
+        <input type="password" id="senha" placeholder="Senha">
+        <input type="password" id="confirmarSenha" placeholder="Confirmar senha">
+
+        <div class="spinner" id="spinner"></div>
+        <p class="erro" id="erro"></p>
+        <button onclick="cadastrar()">☆Cadastrar</button>
+        <div class="se">
+            <a href="login.html">☆Iniciar sessão...</a>
+        </div>
+        <div class="buttons">
+
+            <a href="privacidade.html">☆Priva</a>
+            <a href="ajuda.html">☆Ajuda</a>
+            <a href="sobreluvita.html">☆Sobre</a>
+        </div>
+        <div class="footer">
+            &copy; 2025 LuVita. Todos os direitos reservados(António).
+        </div>
+    </div>
+</div>
+<div class="bolhas">
+    <span></span><span></span><span></span><span></span><span></span>
+    <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-auth-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+<script>
+    // Configuração do Firebase
+    const firebaseConfig = {
+        apiKey: "AIzaSyBCIpRTaApxYi_oXS3cjhmey8ZOJOJcHQg",
+        authDomain: "luvita-b6d67.firebaseapp.com",
+        databaseURL: "https://luvita-b6d67-default-rtdb.firebaseio.com",
+        projectId: "luvita-b6d67",
+        storageBucket: "luvita-b6d67.appspot.com",
+        messagingSenderId: "850286171627",
+        appId: "1:850286171627:web:052b6e26b22e678a47b5ae"
+    };
+
+    // Inicializa o Firebase
+    firebase.initializeApp(firebaseConfig);
+    const auth = firebase.auth();
+    const db = firebase.database();
+
+   function cadastrar() {
+    const nome = document.getElementById("nome").value.trim();
+    const email = document.getElementById("email").value.trim();
+    const senha = document.getElementById("senha").value;
+    const confirmarSenha = document.getElementById("confirmarSenha").value;
+    const pais = document.getElementById("pais").value.trim(); 
+    const fotoInput = document.getElementById("foto");         
+    const erro = document.getElementById("erro");
+    const spinner = document.getElementById("spinner");
+
+    erro.textContent = "";
+
+    // Verifica se todos os campos estão preenchidos, incluindo a foto
+    if (!nome || !email || !senha || !confirmarSenha || !pais || !fotoInput.files || fotoInput.files.length === 0) {
+        erro.textContent = "Preencha todos os campos, incluindo a foto!";
+        return;
+    }
+
+    if (senha !== confirmarSenha) {
+        erro.textContent = "As senhas não coincidem.";
+        return;
+    }
+
+    if (senha !== confirmarSenha) {erro.textContent = "As senhas não coincidem.";
+        return;
+    }
+
+    spinner.style.display = "inline-block";
+
+    // Processa a imagem (se tiver)
+    const file = fotoInput.files[0];
+
+    if (file) {
+        const reader = new FileReader();
+        reader.onloadend = function () {
+            const fotoBase64 = reader.result; //  base64 da imagem
+            criarUsuario(fotoBase64); // chama a função com a imagem
+        };
+        reader.readAsDataURL(file);
+    } else {
+        criarUsuario(""); // se não tiver foto, passa string vazia
+    }
+
+    function criarUsuario(fotoBase64) {
+        auth.createUserWithEmailAndPassword(email, senha)
+        .then((userCredential) => {
+            const uid = userCredential.user.uid;
+
+            db.ref("usuarios/" + uid).set({
+                nome: nome,
+                email: email,
+                pais: pais,           //  Incluído país
+                fotoURL: fotoBase64   //  Incluído foto como base64
+            }).then(() => {
+                localStorage.setItem("uid", uid);
+                spinner.style.display = "none";
+                window.location.href = "perfil1.html";
+            });
+        })
+        .catch((error) => {
+            spinner.style.display = "none";
+if (error.code === 'auth/email-already-in-use') {
+                erro.textContent = "Este e-mail já está em uso.";
+            } else if (error.code === 'auth/invalid-email') {
+                erro.textContent = "E-mail inválido.";
+            } else if (error.code === 'auth/weak-password') {
+                erro.textContent = "A senha deve ter pelo menos 6 caracteres.";
+            } else {
+                erro.textContent = "Erro: " + error.message;
+            }
+        });
+    }
+}
+</script>
+<script>
+    // alert('Seja benvido(a) á Luvita.        Sua rede de comunicaçao mais simples e rapido, Cria conta em menos de 1 minuto...')
+</script>
+</body>
+</html>

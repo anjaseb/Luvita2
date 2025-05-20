@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Chat em Grupo</title>
+  
+</head>
+<style>
+    body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #ece5dd;
+}
+
+.chat-container {
+  max-width: 600px;
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  height: 100vh;
+  border: 1px solid #ccc;
+  background-color: #fff;
+}
+
+.chat-header {
+  background-color: #075e54;
+  color: #fff;
+  padding: 10px;
+  text-align: center;
+}
+
+.chat-messages {
+  flex: 1;
+  padding: 10px;
+  overflow-y: auto;
+  background-color: #e5ddd5;
+}
+
+.message {
+  margin-bottom: 10px;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background-color: #dcf8c6;
+  max-width: 80%;
+}
+
+.sender {
+  font-weight: bold;
+  display: block;
+  margin-bottom: 2px;
+}
+
+.chat-input {
+  display: flex;
+  padding: 10px;
+  background-color: #f0f0f0;
+}
+
+.chat-input input {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  border-radius: 20px;
+  margin-right: 10px;
+}
+
+.chat-input button {
+  padding: 10px 20px;
+  border: none;
+  border-radius: 20px;
+  background-color: #075e54;
+  color: #fff;
+  cursor: pointer;
+}
+</style>
+<body>
+  <div class="chat-container">
+    <div class="chat-header">
+      <h2>Grupo de Chat</h2>
+    </div>
+    <div id="chat-messages" class="chat-messages"></div>
+    <div class="chat-input">
+      <input type="text" id="message-input" placeholder="Digite uma mensagem..." />
+      <button id="send-button">Enviar</button>
+    </div>
+  </div>

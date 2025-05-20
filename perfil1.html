@@ -1,0 +1,560 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Perfil do Aluno - Luvita</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <style>
+        body {
+            font-family: Times New Roman;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-size: cover;
+            background-position: center;
+            animation: e 30s infinite;
+            animation-timing-function: ease-in-out;
+            overflow: hidden;
+        }
+
+        /* Troca de imagens suavemente a cada 10 segundos */
+@keyframes e {
+            0% {
+                background-image: url('1a.webp');
+            }
+            33% {
+                background-image: url('2a.webp');
+            }
+            66% {
+                background-image: url('5a.webp');
+            }
+            100% {
+                background-image: url('1a.webp');
+            }
+        }
+        .topo {
+
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+
+
+            align-items: center;
+          background: url('4a.webp');
+            background-size: 800% 100%;
+           /* animation: mudarCores 30s ease infinite;*/
+
+
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2a8c3f;
+
+        }
+        .container p {
+            font-family: Times New Roman;
+            font-size: 14px;
+            color: #002857;
+            margin-top: -60px;
+            margin-left: 90px;
+            display: flex;
+
+        }
+
+        .container h2 {
+            font-family: Times New Roman;
+            background: rgba(100,100,100,0.5);
+            border-radius: 50%;
+        }
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: auto;
+            background: rgba(100,100,100,0.9);
+
+        }
+        h2, h3 {
+            text-align: center;
+            color: #FFFFFF;
+        }
+        input, textarea {
+            width: 100%;
+            padding: 12px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+        .boas-vindas {
+            font-size: 20px;
+            margin-top: 20px;
+        }
+        .usuarios {
+            overflow-x: auto;
+            display: flex;
+            gap: 10px;
+            padding: 10px;
+            background: url('i.jpeg');
+            white-space: nowrap;
+        }
+        .usuario {
+            background: white;
+            padding: 8px;
+            border-radius: 8px;
+            min-width: 120px;
+            text-align: center;
+            font-size: 14px;
+        }
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #2a8c3f;
+            color: white;
+            font-size: 16px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        .mensagem {
+            text-align: center;
+            color: green;
+            margin-top: 10px;
+        }
+
+
+@keyframes mudarCores {
+            0% {
+                background-position: 0% 50%;
+            }
+            50% {
+                background-position: 100% 50%;
+            }
+            100% {
+                background-position: 0% 50%;
+            }
+        }
+        .perfil {
+            position: absolute;
+            top: 130px;
+            right: 265px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            z-index: 10;
+            margin: 9px;
+        }
+
+        /* Estilo da imagem de perfil */
+        .perfil-foto {
+            width: 70px;
+            height: 70px;
+            border-radius: 100%;
+            object-fit: cover;
+            border: 3px solid #00cc94;
+            box-shadow: 0 0 10px rgba(0, 255, 179, 0.4);
+            cursor: pointer;
+            transition: transform 0.3s ease;
+
+        }
+
+        /* Efeito ao passar o mouse */
+        .perfil-foto:hover {
+            transform: scale(1.05);
+        }
+
+        /* Input escondido para escolher a imagem */
+        #fotoInput {
+
+            display: none;
+
+        }
+
+
+
+
+        .logo-circle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(270deg,#004762,#000651);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top: -3px;
+            right: 20px;
+            margin: 2px;
+            box-shadow: 0 0 15px rgba(0, 255, 179, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #FFFFFF;
+            position: relative;
+
+        }
+        .logo-text a {
+            text-decoration: none;
+        }
+
+        .logo-text .i-star {
+            position: relative;
+        }
+
+        .logo-text .i-star .star {
+            position: absolute;
+            top: -18px;
+            left: 4px;
+            font-size: 1.2em;
+            color: #FFFFFF;
+            animation: glow 20s ease-in-out infinite;
+        }
+
+@keyframes glow {
+            0%, 100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+        .contact-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 0px;
+        }
+
+        .contact-icons a,
+        .contact-icons button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: #001BFF;
+            transition: transform 0.2s ease, color 0.3s ease;
+        }
+
+        .contact-icons a:hover i,
+        .contact-icons button:hover i {
+            transform: scale(1.2);
+            color: #00ffc8;
+        }
+        /* Estilizando o fundo do modal */
+
+        .painel {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0,0,0,0.5);
+            /* Fundo escurecido */
+            justify-content: center;
+            align-items: center;
+            z-index: 1000;
+        }
+
+        .painel-conteudo {
+            position: relative;
+            width: 90%;
+            max-width: 600px;
+            height: 80%;
+            background: white;
+            border-radius: 10px;
+            overflow: hidden;
+        }
+
+        .painel iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .fechar {
+            position: absolute;
+            top: 10px;
+            right: 15px;
+            font-size: 1.5em;
+            color: #333;
+            cursor: pointer;
+            z-index: 1001;
+        }
+        #Residencia {
+            color: #FFFFFF;
+        }
+        .aviso {}
+
+    </style>
+</head>
+<body>
+
+
+    <div class="perfil">
+        <img id="fotoPerfil" class="perfil-foto" src="2.webp" alt="Foto de Perfil">
+
+    </div>
+
+
+
+    <div class="topo">
+
+        <div class="contact-icons">
+
+            <a href="perfil1.html">
+                <i class="fas fa-home"></i>
+            </a>
+            <button onclick="abrirPainel('painelpesquisar')" title="pesquisar">
+                <i class="fab fa-searchengin"></i>
+            </button>
+            <button onclick="abrirPainel('painelchat')" title="chat">
+                <i class="fas fa-comments"></i>
+            </button>
+            <a href="grupo.html"> <i class="fas fa-users"></i></a>
+            <a href="menu.html">
+                <i class="fas fa-cogs"></i>
+            </a>
+        </div>
+
+
+        <div class="logo-circle">
+            <div class="logo-text">
+                Lu<span class="i-star"><a href="index.html">Vita</a><span class="star"></span></span>
+
+            </div>
+
+        </div>
+    </div>
+
+
+    <div class="usuarios" id="listaUsuarios">
+        <!-- Lista de usuários vai aqui -->
+    </div>
+
+    <div class="container">
+        <h2 class="boas-vindas" id="nomeAluno">Carregando...</h2>
+        <p id="paisAluno">
+            Carregando...
+        </p>
+    </div>
+    <div class="aviso">
+        <h3>Em desenvolvimento...</h3>
+    </div>
+    <!-- Painel de Pesquisa -->
+    <div id="painelpesquisar" class="painel" onclick="fecharPainelAoClicarFora(event, 'painelpesquisar')">
+        <div class="painel-conteudo">
+            <span class="fechar" onclick="fecharPainel('painelpesquisar')">&times;</span>
+            <iframe src="pesquisar.html"></iframe>
+        </div>
+    </div>
+
+    <!-- Painel de Mensagens -->
+    <div id="painelchat" class="painel" onclick="fecharPainelAoClicarFora(event, 'painelchat')">
+        <div class="painel-conteudo">
+            <span class="fechar" onclick="fecharPainel('painelchat')">&times;</span>
+            <iframe src="chat.html"></iframe>
+        </div>
+    </div>
+
+    <!-- Painel de Menu -->
+    <div id="painelmenu" class="painel" onclick="fecharPainelAoClicarFora(event, 'painelmenu')">
+        <div class="painel-conteudo">
+            <span class="fechar" onclick="fecharPainel('painelmenu')">&times;</span>
+            <iframe src="menu.html"></iframe>
+        </div>
+    </div>
+</body>
+
+  <div id="bg-container"></div>
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+<script>
+    const firebaseConfig = {
+        apiKey: "AIzaSyBCIpRTaApxYi_oXS3cjhmey8ZOJOJcHQg",
+        authDomain: "luvita-b6d67.firebaseapp.com",
+        databaseURL: "https://luvita-b6d67-default-rtdb.firebaseio.com",
+        projectId: "luvita-b6d67",
+        storageBucket: "luvita-b6d67.appspot.com",
+        messagingSenderId: "850286171627",
+        appId: "1:850286171627:web:052b6e26b22e678a47b5ae"
+    };
+
+    firebase.initializeApp(firebaseConfig);
+    const db = firebase.database();
+
+    const uid = localStorage.getItem("uid");
+
+
+
+    if (uid) {
+        const usuarioRef = db.ref("usuarios/" + uid);
+        usuarioRef.once("value")
+        .then(snapshot => {
+            if (snapshot.exists()) {
+                const dados = snapshot.val();
+
+
+                // Exibe o país
+                const paisElement = document.getElementById("paisAluno");
+                if (paisElement) {
+                    const pais = dados.pais ? dados.pais: "não informado";
+                    paisElement.innerText = `☆${pais}`;
+                }
+
+                // Exibe a foto de perfil
+                const fotoElement = document.getElementById("fotoPerfil");
+                if (fotoElement) {
+                    fotoElement.src = dados.fotoURL || "default-profile.png";
+                }
+            } else {
+                // Usuário não encontrado
+                const paisElement = document.getElementById("paisAluno");
+                if (paisElement) {
+                    paisElement.innerText = "País não encontrado.";
+                }
+                const fotoElement = document.getElementById("fotoPerfil");
+                if (fotoElement) {
+                    fotoElement.src = "default-profile.png";
+                }
+            }
+        })
+        .catch(() => {
+            // Erro ao carregar dados
+            const paisElement = document.getElementById("paisAluno");
+            if (paisElement) {
+                paisElement.innerText = "Erro ao carregar país.";
+            }
+            const fotoElement = document.getElementById("fotoPerfil");
+            if (fotoElement) {
+                fotoElement.src = "default-profile.png";
+            }
+        });
+    } else {
+        // UID não encontrado no localStorage
+        const paisElement = document.getElementById("paisAluno");
+        if (paisElement) {
+            paisElement.innerText = "Usuário não autenticado.";
+        }
+        const fotoElement = document.getElementById("fotoPerfil");
+        if (fotoElement) {
+            fotoElement.src = "default-profile.png";
+        }
+    }
+
+
+
+    if (!uid) {
+        document.getElementById("nomeAluno").innerText = "Erro: usuário não autenticado.";
+    } else {
+        // Busca nome do usuário atual
+        firebase.database().ref("usuarios/" + uid).once("value").then(snapshot => {
+            const nome = snapshot.val().nome;
+            document.getElementById("nomeAluno").innerText = ` ${nome}!`;
+        }).catch(err => {
+            document.getElementById("nomeAluno").innerText = "Erro ao carregar dados.";
+        });
+
+        // Busca lista de usuários para rolar
+        firebase.database().ref("usuarios").once("value").then(snapshot => {
+            const lista = document.getElementById("listaUsuarios");
+            lista.innerHTML = ""; // limpa
+
+            snapshot.forEach(child => {
+                const usuario = child.val();
+                const div = document.createElement("div");
+                div.className = "usuario";
+                div.textContent = usuario.nome;
+                lista.appendChild(div);
+            });
+        });
+    }
+</script>
+
+<script>
+    function abrirPainel(id) {
+        document.querySelectorAll('.painel').forEach(p => p.style.display = 'none');
+        const painel = document.getElementById(id);
+        if (painel) {
+            painel.style.display = 'flex';
+        }
+    }
+
+    function fecharPainel(id) {
+        const painel = document.getElementById(id);
+        if (painel) {
+            painel.style.display = 'none';
+        }
+    }
+
+    function fecharPainelAoClicarFora(event, id) {
+        const painel = document.getElementById(id);
+        const conteudo = painel.querySelector('.painel-conteudo');
+        if (!conteudo.contains(event.target)) {
+            painel.style.display = 'none';
+        }
+    }
+</script>
+<script>
+// Espera o carregamento da autenticação
+auth.onAuthStateChanged((user) => {
+  if (user) {
+    const usuariosRef = database.ref("usuarios");
+
+    usuariosRef.once("value")
+      .then(snapshot => {
+        const users = snapshot.val();
+        const fotos = [];
+
+        for (let uid in users) {
+          const user = users[uid];
+          if (user.fotoURL) {
+            fotos.push(user.fotoURL);
+          }
+        }
+
+        if (fotos.length > 0) {
+          iniciarSlideshow(fotos);
+        }
+      })
+      .catch(error => {
+console.error("Erro ao buscar fotos:", error);
+      });
+  }
+});
+
+// Função para iniciar o slideshow
+function iniciarSlideshow(fotos) {
+  const container = document.getElementById("bg-container");
+
+  fotos.forEach((foto, index) => {
+    const img = document.createElement("img");
+    img.src = foto;
+    img.classList.add("bg-image");
+    if (index === 0) img.classList.add("active");
+    container.appendChild(img);
+  });
+
+  let atual = 0;
+  setInterval(() => {
+    const imagens = document.querySelectorAll(".bg-image");
+    imagens[atual].classList.remove("active");
+    atual = (atual + 1) % imagens.length;
+    imagens[atual].classList.add("active");
+  }, 5000); // Troca a cada 5 segundos
+}
+</script>
+</body>
+</html>

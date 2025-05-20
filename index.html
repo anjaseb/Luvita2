@@ -1,0 +1,484 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#002147">
+    <link rel="icon" type="image/png" href="9.png">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Luvita - Página Inicial</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', sans-serif;
+            background: linear-gradient(200deg,#001D43, #003175);
+            background-size: cover;
+            color: #fff;
+            padding: 20px;
+            overflow: hidden;
+
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header h1 {
+            font-size: 2.5em;
+            color: #707070;
+        }
+
+        header p {
+            color: #727272;
+            font-size: 1.2em;
+            margin-top: 10px;
+        }
+
+        .main-container {
+            max-width: 600px;
+            margin: 0 auto;
+            background-color: rgba(255, 255, 255, 0.05);
+            padding: 20px;
+            border-radius: 10px;
+        }
+
+        h2 {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        h3 {
+            margin: 30px 0 10px;
+        }
+
+        .btn-group {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .btn {
+            text-decoration: none;
+            text-align: center;
+            padding: 12px;
+            border-radius: 40px;
+            font-weight: bold;
+            font-size: 1em;
+            transition: background 0.3s ease;
+            background: linear-gradient(270deg,#006A6E,#FFFFFF);
+
+        }
+
+        .btn:hover {
+            background-color: #d62828;
+        }
+
+        .btn.secondary {
+            background-color: transparent;
+            border: 2px solid #f1faee;
+            color: #f1faee;
+        }
+
+        .btn.secondary:hover {
+            background-color: #f1faee;
+            color: #1d3557;
+        }
+
+        .menu-wrapper {
+            position: relative;
+            display: inline-block;
+            float: right;
+            margin: 10px;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: white;
+        }
+
+        .menu-opcoes {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background: transparent;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            min-width: 150px;
+            overflow: hidden;
+        }
+
+        .menu-opcoes a {
+            display: block;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #003;
+        }
+
+        .menu-opcoes a:hover {
+            background-color: #004762;
+        }
+        .logo-circle {
+            width: 75px;
+            height: 75px;
+            border-radius: 50%;
+            background: linear-gradient(200deg,#001D43, #003175);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top: -20px;
+            left: -120px;
+            margin: 0 auto;
+            box-shadow: 0 0 15px rgba(0, 255, 179, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #FFFFFF;
+            position: relative;
+
+        }
+        .logo-text a {
+            text-decoration: none;
+        }
+
+        .logo-text .i-star {
+            position: relative;
+        }
+
+        .logo-text .i-star .star {
+            position: absolute;
+            top: -18px;
+            left: 4px;
+            font-size: 1.2em;
+            color: #FFFFFF;
+            animation: glow 5.5s ease-in-out infinite;
+        }
+
+@keyframes glow {
+            0%, 100% {
+                opacity: 0.7;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 1;
+                transform: scale(1.3);
+            }
+        }
+
+
+
+
+
+        .image-gallery {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 20px;
+            padding: 40px 20px;
+        }
+
+        .image-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+            box-shadow: 0 0 15px rgba(0, 255, 179, 0.5);
+            transition: transform 0.3s ease;
+        }
+
+        .image-circle:hover {
+            transform: scale(1.1);
+        }
+        .usuarios {
+            overflow-x: auto;
+            display: flex;
+            gap: 15px;
+            padding: 15px 10px;
+            background: url('i.jpeg') no-repeat center;
+            background-size: cover;
+            white-space: nowrap;
+            scroll-snap-type: x mandatory;
+        }
+
+        .usuario {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 10px;
+            border-radius: 12px;
+            min-width: 100px;
+            text-align: center;
+            font-size: 14px;
+            scroll-snap-align: start;
+            transition: transform 0.3s ease;
+        }
+
+        .usuario:hover {
+            transform: scale(1.05);
+            cursor: pointer;
+        }
+
+        .foto-usuario {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            object-fit: cover;
+            margin-bottom: 8px;
+            border: 2px solid #00cc94;
+        }
+
+        .nome-usuario {
+            font-weight: bold;
+            color: #013220;
+        }
+        #instalarBtn {
+            background: linear-gradient(135deg, #004762, #000651);
+            color: white;
+            border: none;
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1em;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+        }
+        #instalarBtn:hover {
+            background: #00cc94;
+        }
+        .bolhas span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            bottom: -150px;
+            border-radius: 50%;
+            animation: subir 20s linear infinite;
+        }
+
+        .bolhas span:nth-child(1) {
+            left: 10%;
+            animation-duration: 15s;
+        }
+        .bolhas span:nth-child(2) {
+            left: 20%;
+            width: 25px;
+            height: 25px;
+            animation-duration: 12s;
+        }
+        .bolhas span:nth-child(3) {
+            left: 35%;
+            animation-duration: 18s;
+        }
+        .bolhas span:nth-child(4) {
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            animation-duration: 14s;
+        }
+        .bolhas span:nth-child(5) {
+            left: 65%;
+            animation-duration: 16s;
+        }
+        .bolhas span:nth-child(6) {
+            left: 75%;
+            width: 22px;
+            height: 22px;
+            animation-duration: 13s;
+        }
+        .bolhas span:nth-child(7) {
+            left: 85%;
+            animation-duration: 19s;
+        }
+        .bolhas span:nth-child(8) {
+            left: 95%;
+            width: 18px;
+            height: 18px;
+            animation-duration: 17s;
+        }
+        .bolhas span:nth-child(9) {
+            left: 5%;
+            animation-duration: 15s;
+        }
+        .bolhas span:nth-child(10) {
+            left: 40%;
+            width: 24px;
+            height: 24px;
+            animation-duration: 20s;
+        }
+
+@keyframes subir {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1200px);
+                opacity: 0;
+            }
+        }
+    </style>
+</head>
+<body>
+
+    <div class="menu-wrapper">
+        <button class="menu-btn" onclick="toggleMenu()">⋮</button>
+        <div class="menu-opcoes" id="menuOpcoes">
+            <a href="ajuda.html">Ajuda</a>
+            <a href="privacidade.html">Privacidade</a>
+            <a href="sobreluvita.html">Sobre</a>
+            <button id="instalarBtn" style="display: flex;"> Instale LuVita PWA</button>
+        </div>
+    </div>
+
+    <header>
+
+        <div class="logo-circle">
+            <div class="logo-text">
+                Lu<span class="i-star"><a href="index.html">Vita</a><span class="star">★</span></span>
+            </div>
+        </div>
+
+        <!--<h1 id="titulo">☆LuVita</h1>-->
+        <p id="subtitulo">
+            Leve, acessível e segura.
+        </p>
+
+    </header>
+
+    <section class="main-container">
+
+
+        <div class="btn-group">
+            <a href="login.html" class="btn" id="estudante">Iniciar sessão</a>
+            <canvas id="meuGraficoBolhas" width="600" height="400"></canvas>
+            <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+        </section>
+        <div class="bolhas">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+
+
+        <script>
+
+            // Busca lista de usuários para rolar
+            firebase.database().ref("usuarios").once("value").then(snapshot => {
+                const lista = document.getElementById("listaUsuarios");
+                lista.innerHTML = ""; // limpa
+
+                snapshot.forEach(child => {
+                    const usuario = child.val();
+                    const div = document.createElement("div");
+                    div.className = "usuario";
+                    div.textContent = usuario.nome;
+                    lista.appendChild(div);
+                });
+            });
+        }
+    </script>
+    <script>
+        const ctx = document.getElementById('meuGraficoBolhas').getContext('2d');
+        const meuGraficoBolhas = new Chart(ctx, {
+            type: 'bubble',
+            data: {
+                datasets: [{
+                    label: 'kif',
+                    data: [{
+                        x: 10, y: 20, r: 15
+                    },
+                        {
+                            x: 15, y: 10, r: 10
+                        },
+                        {
+                            x: 20, y: 30, r: 20
+                        },
+                        {
+                            x: 25, y: 25, r: 12
+                        }],
+                    backgroundColor: 'rgba(54, 162, 235, 0.5)',
+                    borderColor: 'rgba(54, 162, 235, 1)'
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    title: {
+                        display: true,
+                        text: 'LuVita'
+                    }
+                },
+                scales: {
+                    x: {
+                        title: {
+                            display: true,
+                            text: 'Eixo X'
+                        }
+                    },
+                    y: {
+                        title: {
+                            display: true,
+                            text: 'Eixo Y'
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+    <script>
+        if ("serviceWorker" in navigator) {
+            navigator.serviceWorker.register("service-worker.js")
+            .then(reg => console.log("Service Worker registrado", reg))
+            .catch(err => console.error("Erro ao registrar o Service Worker", err));
+        }
+    </script>
+    <script>
+        let eventoInstalacao;
+
+        window.addEventListener('beforeinstallprompt', (e) => {
+            e.preventDefault(); // Impede o prompt automático
+            eventoInstalacao = e;
+            document.getElementById('instalarBtn').style.display = 'block'; // Mostra botão
+        });
+
+        document.getElementById('instalarBtn').addEventListener('click', () => {
+            if (eventoInstalacao) {
+                eventoInstalacao.prompt(); // Mostra o prompt
+                eventoInstalacao.userChoice.then(choiceResult => {
+                    if (choiceResult.outcome === 'accepted') {
+                        console.log('Usuário aceitou instalar');
+                    } else {
+                        console.log('Usuário recusou instalar');
+                    }
+                    eventoInstalacao = null;
+                });
+            }
+        });
+    </script>
+    <script>
+        function toggleMenu() {
+            const menu = document.getElementById("menuOpcoes");
+            menu.style.display = (menu.style.display === "block") ? "none": "block";
+        }
+
+        // Fecha o menu se clicar fora
+        document.addEventListener('click', function(event) {
+            const isClickInside = document.querySelector('.menu-wrapper').contains(event.target);
+            if (!isClickInside) {
+                document.getElementById("menuOpcoes").style.display = "none";
+            }
+        });
+    </script>
+
+
+</body>
+</html>

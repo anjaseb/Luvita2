@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+  <title>Chat</title>
+  <style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #001F26;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+  }
+
+  .chat-container {
+    width: 100%;
+    max-width: 500px;
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+
+  .chat-header {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    text-align: center;
+    background: url('4a.webp');
+    background-size: 800% 100%;
+    color: white;
+    position: relative;
+  }
+
+  .chat-header h6 {
+    font-family: "Times New Roman", serif;
+    margin-top: -4px;
+  }
+
+  .chat-header p {
+    position: absolute;
+    left: 10px;
+    top: 30px;
+    color: #000;
+  }
+
+  .chat-header img {
+    position: absolute;
+    right: 10px;
+    top: 10px;
+    width: 50px;
+    height: 50px;
+border-radius: 50%;
+  }
+
+  .chat-messages {
+    flex: 1;
+    padding: 10px;
+    overflow-y: auto;
+    background-color: #C8C8C8;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .chat-input {
+    display: flex;
+    padding: 10px;
+    border-top: 1px solid #00E3FF;
+    background-color: #f0f0f0;
+  }
+
+  .chat-input input {
+    flex: 1;
+    padding: 10px;
+    border: 1px solid #00E7FF;
+    border-radius: 20px;
+    outline: none;
+  }
+
+  .chat-input button {
+    margin-left: 10px;
+    background-color: #00262C;
+    color: #fff;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    padding: 10px 20px;
+  }
+
+  .chat-input button:hover {
+    background-color: #128c7e;
+  }
+
+  .message {
+    margin-bottom: 10px;
+    max-width: 70%;
+    padding: 10px;
+    border-radius: 15px;
+    word-wrap: break-word;
+  }
+
+  .message.me {
+    align-self: flex-end;
+    background: linear-gradient(130deg, #529D62, #FF82D8);
+    background-size: cover;
+    animation: mudarCores 5s ease infinite;
+    border-radius: 10px 0 10px 10px;
+    margin-left: 100px;
+  }
+
+  .message.them {
+    align-self: flex-start;
+    background: linear-gradient(130deg, #4395A9, #63AEFF);
+    background-size: cover;
+    animation: mudarCores 5s ease infinite;
+    border-radius: 0 10px 10px 10px;
+  }
+@keyframes mudarCores {
+    0% {
+      background-position: 0% 50%;
+    }
+    50% {
+      background-position: 100% 50%;
+    }
+    100% {
+      background-position: 0% 50%;
+    }
+  }
+
+  .avatar {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin: 0 10px;
+  }
+
+  .text {
+    max-width: 100%;
+    word-wrap: break-word;
+  }
+
+  .contact-icons {
+    display: flex;
+    gap: 15px;
+    align-items: center;
+    justify-content: center;
+    margin-top: 0px;
+  }
+
+  .contact-icons a,
+  .contact-icons button {
+    background-color: transparent;
+    border: none;
+    cursor: pointer;
+    font-size: 1.5em;
+    color: #000DFF;
+    transition: transform 0.2s ease, color 0.3s ease;
+  }
+
+  .contact-icons a:hover i,
+  .contact-icons button:hover i {
+    transform: scale(1.2);
+    color: #00ffc8;
+  }
+
+  /* Responsividade para telas maiores */
+  @media screen and (min-width: 768px) {
+    .chat-container {
+      max-width: 600px;
+      height: 90vh;
+    }
+  }
+  
+  </style>
+</head>
+<body>
+    
+    
+    
+  <div class="chat-container">
+      <div class="chat-header">
+
+           
+          <div class="contact-icons">
+
+            <!-- Botão que abre o painel de mensagens -->
+             <a href="perfil1.html">
+                <i class="fas fa-home"></i>
+            </a>
+            <button onclick="abrirPainel('painelpesquisar')" title="pesquisar">
+                <i class="fab fa-searchengin"></i>
+            </button>
+            
+            <button onclick="abrirPainel('painelchat')" title="chat">
+                <i class="fas fa-comments"></i>
+            </button>
+            <a href="grupo.html"> <i class="fas fa-users"></i></a>
+            <a href="menu.html">
+                <i class="fas fa-cogs"></i>
+            </a>
+           
+        </div>
+  <h4 id="nomeUsuario">Nome do Usuário</h4>
+      <img id="fotoPerfil" src="2.webp" alt="Foto de Perfil" />
+    
+      <p id="paisUsuario">País do Usuário</p>
+    </div>
+    <div class="chat-messages" id="chat-messages">
+      <!-- Mensagens serão exibidas aqui -->
+    </div>
+    <div class="chat-input">
+      <input type="text" id="message-input" placeholder="Digite sua mensagem..." />
+      <button id="send-button">Enviar</button>
+    </div>
+  </div>
+
+   <!-- Firebase SDKs -->
+  <script type="module">
+    // Importando os módulos necessários do Firebase
+    import { initializeApp } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-app.js";
+import { getDatabase, ref, push, onChildAdded, set, get, child } from "https://www.gstatic.com/firebasejs/9.15.0/firebase-database.js";
+
+    // Configuração do Firebase
+    const firebaseConfig = {
+      apiKey: "AIzaSyBCIpRTaApxYi_oXS3cjhmey8ZOJOJcHQg",
+      authDomain: "luvita-b6d67.firebaseapp.com",
+      databaseURL: "https://luvita-b6d67-default-rtdb.firebaseio.com",
+      projectId: "luvita-b6d67",
+      storageBucket: "luvita-b6d67.appspot.com",
+      messagingSenderId: "850286171627",
+      appId: "1:850286171627:web:052b6e26b22e678a47b5ae",
+      measurementId: "G-Q9J088RFDK"
+    };
+
+    // Inicializando o Firebase
+    const app = initializeApp(firebaseConfig);
+    const database = getDatabase(app);
+    
+
+ // IDs dos usuários
+const currentUserId = localStorage.getItem("uid"); // seu ID
+const targetUserId = localStorage.getItem("perfilUsuario"); // ID da outra pessoa
+
+// Variáveis para armazenar as URLs das fotos de perfil
+let currentUserPhotoURL = "";
+let targetUserPhotoURL = "";
+
+// Função para carregar as fotos de perfil
+function loadUserPhotos() {
+  // Referência ao nó do usuário atual no banco de dados
+  const currentUserRef = ref(database, "usuarios/" + currentUserId);
+  get(currentUserRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      const user = snapshot.val();
+      currentUserPhotoURL = user.fotoURL || "2v.jpeg";
+    } else {
+      currentUserPhotoURL = "12.jpg";
+    }
+  }).catch((error) => {
+    console.error(error);
+    currentUserPhotoURL = "1v.jpeg";
+  });
+  // Mostrar dados do usuário
+  const userRef = ref(database, "usuarios/" + targetUserId);
+  get(userRef).then((snapshot) => {
+    if (snapshot.exists()) {const user = snapshot.val();
+      document.getElementById("nomeUsuario").textContent = user.nome || "Sem nome";
+      document.getElementById("paisUsuario").textContent = user.pais || "Sem país";
+      if (user.fotoURL) {
+        document.getElementById("fotoPerfil").src = user.fotoURL;
+      }
+    } else {
+      alert("Usuário não encontrado.");
+    }
+  }).catch((error) => {
+    console.error(error);
+  });
+
+  // Referência ao nó do usuário alvo no banco de dados
+const targetUserRef = ref(database, "usuarios/" + targetUserId);
+  get(targetUserRef).then((snapshot) => {
+    if (snapshot.exists()) {
+      const user = snapshot.val();
+      targetUserPhotoURL = user.fotoURL || "1v.jpeg";
+    } else {
+      targetUserPhotoURL = "1v.jpeg";
+    }
+  }).catch((error) => {
+    console.error(error);
+    targetUserPhotoURL = "2v.jpeg";
+  });
+}
+
+// Chamar a função para carregar as fotos de perfil
+loadUserPhotos();
+
+// ID único da conversa
+const conversationId = [currentUserId, targetUserId].sort().join("_");
+const messagesRef = ref(database, "conversas/" + conversationId);
+
+// Enviar mensagem
+document.getElementById("send-button").addEventListener("click", () => {
+  const messageInput = document.getElementById("message-input");
+  const message = messageInput.value.trim();
+
+  if (message !== "") {
+    const newMessageRef = push(messagesRef);
+    set(newMessageRef, {
+      sender: currentUserId,
+      text: message,
+      timestamp: Date.now()
+    });
+    messageInput.value = "";
+  }
+});
+
+// Mostrar mensagens em tempo real
+onChildAdded(messagesRef, (data) => {
+  const message = data.val();
+  const container = document.createElement("div");
+  container.classList.add("message");
+
+  const isSender = message.sender === currentUserId;
+// Criar imagem do avatar
+  const avatar = document.createElement("img");
+  avatar.classList.add("avatar");
+  avatar.src = isSender ? currentUserPhotoURL : targetUserPhotoURL;
+
+  // Criar o texto da mensagem
+  const text = document.createElement("span");
+  text.classList.add("text");
+  text.textContent = message.text;
+
+  // Estilizar a posição da mensagem
+  if (isSender) {
+    container.classList.add("me");
+    container.appendChild(text);
+    container.appendChild(avatar);
+  } else {
+    container.classList.add("them");
+    container.appendChild(avatar);
+    container.appendChild(text);
+  }
+
+  document.getElementById("chat-messages").appendChild(container);
+  document.getElementById("chat-messages").scrollTop = document.getElementById("chat-messages").scrollHeight;
+});
+</script>
+  <script>
+  function toggleMenu() {
+    const menu = document.getElementById("menuOpcoes");
+menu.style.display = (menu.style.display === "block") ? "none" : "block";
+  }
+
+  // Fecha o menu se clicar fora
+  document.addEventListener('click', function(event) {
+    const isClickInside = document.querySelector('.menu-wrapper').contains(event.target);
+    if (!isClickInside) {
+      document.getElementById("menuOpcoes").style.display = "none";
+    }
+  });
+</script>
+   
+</body>
+</html>

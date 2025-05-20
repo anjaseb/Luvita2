@@ -1,0 +1,370 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>Perfil do Usuário</title>
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous">
+    <style>
+        body {
+            overflow: hidden;
+            font-family: Times New Roman;
+            margin: 0;
+            padding: 0;
+            height: 100vh;
+            background-size: 800% 800%;
+            background-position: center;
+            animation: backgroundSlide 30s infinite;
+            animation-timing-function: ease-in-out;
+        }
+
+        /* Troca de imagens suavemente a cada 10 segundos */
+@keyframes backgroundSlide {
+            0% {
+                  background: linear-gradient(160deg,#001D15,#264460,#071A39,#00252E);
+            }
+            33% {
+                background: linear-gradient(160deg,#001D15,#264460,#071A39,#00252E);
+            }
+            66% {
+                background: linear-gradient(160deg,#001D15,#264460,#071A39,#00252E);
+            }
+            100% {
+                 background: linear-gradient(160deg,#001D15,#264460,#071A39,#00252E);
+            }
+        }
+        .perfil {
+            background: rgba(255, 255, 100, 0.1);
+            padding: 20px;
+            border-radius: 10px;
+            text-align: center;
+            box-shadow: 0 0 10px #ccc;
+        }
+        .perfil img {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+        }
+        .botao a {
+            text-decoration: none;
+            color: #ffffff;
+            background: #000000;
+            border-radius: 20%;
+        }
+
+        .menu-wrapper {
+            position: relative;
+            display: inline-block;
+            float: right;
+            margin: 10px;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            color: #000000;
+        }
+
+        .menu-opcoes {
+            display: none;
+            position: absolute;
+            top: 30px;
+            right: 0;
+            background: #00546C;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.3);
+            z-index: 1000;
+            min-width: 150px;
+            overflow: hidden;
+        }
+
+        .menu-opcoes a {
+            display: block;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #003;
+        }
+
+        .menu-opcoes a:hover {
+            background-color: #004762;
+        }
+
+        .contact-icons {
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            justify-content: center;
+            margin-top: 10px;
+        }
+
+        .contact-icons a,
+        .contact-icons button {
+            background-color: transparent;
+            border: none;
+            cursor: pointer;
+            font-size: 1.5em;
+            color: white;
+            transition: transform 0.2s ease, color 0.3s ease;
+        }
+
+        .contact-icons a:hover i,
+        .contact-icons button:hover i {
+            transform: scale(1.2);
+            color: #00ffc8;
+        }
+        .topo {
+
+            padding: 5px 10px;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+
+
+
+
+            align-items: center;
+           background: url('4a.webp');
+            background-size: 800% 100%;
+           /* animation: mudarCores 30s ease infinite;*/
+
+        }
+        .logo-circle {
+            width: 65px;
+            height: 65px;
+            border-radius: 50%;
+            background: linear-gradient(270deg,#004762,#000651);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top: -3px;
+            right: 20px;
+            margin: 2px;
+            box-shadow: 0 0 15px rgba(0, 255, 179, 0.5);
+        }
+
+        .logo-text {
+            font-size: 1.8em;
+            font-weight: bold;
+            color: #FFFFFF;
+            position: relative;
+
+        }
+        .logo-text a {
+            text-decoration: none;
+        }
+
+        .logo-text .i-star {
+            position: relative;
+        }
+
+        .logo-text .i-star .star {
+            position: absolute;
+            top: -18px;
+            left: 4px;
+            font-size: 1.2em;
+            color: #FFFFFF;
+            animation: glow 20s ease-in-out infinite;
+        }
+        .logo {
+            font-size: 24px;
+            font-weight: bold;
+            color: #2a8c3f;
+
+
+            @keyframes glow {
+            0%, 100% {
+            opacity: 0.7;
+            transform: scale(1);
+        }
+        50% {
+            opacity: 1;
+            transform: scale(1.3);
+        }
+    }
+    .boas-vindas {
+        font-size: 20px;
+        margin-top: 20px;
+    }
+    .usuarios {
+        overflow-x: auto;
+        display: flex;
+        gap: 10px;
+        padding: 10px;
+        background: url('i.jpeg');
+        white-space: nowrap;
+    }
+    .usuario {
+        background: white;
+        padding: 8px;
+        border-radius: 8px;
+        min-width: 120px;
+        text-align: center;
+        font-size: 14px;
+    }
+    .container {
+        padding: 20px;
+        max-width: 600px;
+        margin: auto;
+        background: linear-gradient(270deg, #575757, #979797);
+
+        border-radius: 10px;
+        box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+    .bolhas span {
+  position: absolute;
+  display: block;
+  width: 20px;
+  height: 20px;
+background: rgba(255, 255, 255, 0.1);
+  bottom: -150px;
+  border-radius: 50%;
+  animation: subir 20s linear infinite;
+}
+
+.bolhas span:nth-child(1) { left: 10%; animation-duration: 15s; }
+.bolhas span:nth-child(2) { left: 20%; width: 25px; height: 25px; animation-duration: 12s; }
+.bolhas span:nth-child(3) { left: 35%; animation-duration: 18s; }
+.bolhas span:nth-child(4) { left: 50%; width: 30px; height: 30px; animation-duration: 14s; }
+.bolhas span:nth-child(5) { left: 65%; animation-duration: 16s; }
+.bolhas span:nth-child(6) { left: 75%; width: 22px; height: 22px; animation-duration: 13s; }
+.bolhas span:nth-child(7) { left: 85%; animation-duration: 19s; }
+.bolhas span:nth-child(8) { left: 95%; width: 18px; height: 18px; animation-duration: 17s; }
+.bolhas span:nth-child(9) { left: 5%; animation-duration: 15s; }
+.bolhas span:nth-child(10) { left: 40%; width: 24px; height: 24px; animation-duration: 20s; }
+
+@keyframes subir {
+  0% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translateY(-1200px);
+    opacity: 0;
+  }
+}
+
+</style>
+</head>
+<body>
+    
+<div class="topo">
+
+<div class="contact-icons">
+
+<!-- Botão do perfil1 -->
+
+<a href="pesquisar.html"><i class="fab fa-searchengin"></i></a>
+<a href="chat.html"><i class="fas fa-comments"></i></a>
+<a href="menu.html">
+<i class="fas fa-cogs"></i>
+</a>
+</div>
+
+
+<div class="logo-circle">
+<div class="logo-text">
+Lu<span class="i-star"><a href="index.html">Vita</a><span class="star">》《</span></span>
+
+</div>
+
+</div>
+</div>
+
+
+<div class="menu-wrapper">
+<button class="menu-btn" onclick="toggleMenu()">⋮</button>
+<div class="menu-opcoes" id="menuOpcoes">
+<a href="perfil1.html">Inicial</a>
+<a href="sug.html">Sugestão</a>
+</div>
+</div>
+
+<div class="perfil">
+<div class="perfil">
+<img id="fotoPerfil" src="J.jpg" alt="Foto de Perfil">
+<h2 id="nomeUsuario">Nome</h2>
+<p id="paisUsuario">
+País
+</p>
+
+
+<!-- Adicionado -->
+<button id="btnEnviarMensagem">Enviar SMS</button>
+</div>
+
+ <div class="bolhas">
+  <span></span><span></span><span></span><span></span><span></span>
+  <span></span><span></span><span></span><span></span><span></span>
+</div>
+
+
+
+<!-- Firebase SDK -->
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-app-compat.js"></script>
+<script src="https://www.gstatic.com/firebasejs/9.22.2/firebase-database-compat.js"></script>
+
+<script>
+// Configuração do Firebase
+const firebaseConfig = {
+apiKey: "AIzaSyBCIpRTaApxYi_oXS3cjhmey8ZOJOJcHQg",
+authDomain: "luvita-b6d67.firebaseapp.com",
+databaseURL: "https://luvita-b6d67-default-rtdb.firebaseio.com",
+projectId: "luvita-b6d67",
+storageBucket: "luvita-b6d67.appspot.com",
+messagingSenderId: "850286171627",
+appId: "1:850286171627:web:052b6e26b22e678a47b5ae"
+};
+
+// Inicializa o Firebase
+firebase.initializeApp(firebaseConfig);
+const database = firebase.database();
+
+// Recupera o ID do usuário do localStorage
+const userId = localStorage.getItem("perfilUsuario");
+
+if (!userId) {
+alert("ID do usuário não especificado.");
+} else {
+database.ref('usuarios/' + userId).once('value').then(snapshot => {
+const user = snapshot.val();
+if (user) {
+document.getElementById("nomeUsuario").textContent = user.nome || "Sem nome";
+document.getElementById("paisUsuario").textContent = user.pais || "Sem país";
+
+if (user.fotoURL) {
+document.getElementById("fotoPerfil").src = user.fotoURL;
+}
+} else {
+alert("Usuário não encontrado.");
+}
+});
+}
+
+document.getElementById('btnEnviarMensagem').addEventListener('click', () => {
+const destinatarioID = localStorage.getItem('perfilUsuario');
+localStorage.setItem('conversaCom', destinatarioID);
+window.location.href = 'chat.html';
+});
+</script>
+
+<script>
+function toggleMenu() {
+const menu = document.getElementById("menuOpcoes");
+menu.style.display = (menu.style.display === "block") ? "none": "block";
+}
+
+// Fecha o menu se clicar fora
+document.addEventListener('click', function(event) {
+const isClickInside = document.querySelector('.menu-wrapper').contains(event.target);
+if (!isClickInside) {
+document.getElementById("menuOpcoes").style.display = "none";
+}
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <title>menu</title>
+    <style>
+        body {
+
+            padding: 20px;
+             background: linear-gradient(200deg,#001D43, #003175);
+            color: #FFFFFF;
+            margin: 0%;
+        }
+        h3 {
+            font-family: Arial;
+            background: linear-gradient(200deg,#005668,#003E06);
+            text-align: left;
+            margin-left: -6%;
+            width: 63vh;
+            color: #ACACAC;
+
+
+
+        }
+        #searchInput {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 20px;
+        }
+        .du a {
+            font-family: Times New Roman;
+            background: transparent;
+            width: 70%;
+            text-align: left;
+
+            display: flex;
+            padding: 10px 15px;
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px solid #005;
+
+        }
+        .bolhas span {
+            position: absolute;
+            display: block;
+            width: 20px;
+            height: 20px;
+            background: rgba(255, 255, 255, 0.1);
+            bottom: -150px;
+            border-radius: 50%;
+            animation: subir 20s linear infinite;
+        }
+
+        .bolhas span:nth-child(1) {
+            left: 10%;
+            animation-duration: 15s;
+        }
+        .bolhas span:nth-child(2) {
+            left: 20%;
+            width: 25px;
+            height: 25px;
+            animation-duration: 12s;
+        }
+        .bolhas span:nth-child(3) {
+            left: 35%;
+            animation-duration: 18s;
+        }
+        .bolhas span:nth-child(4) {
+            left: 50%;
+            width: 30px;
+            height: 30px;
+            animation-duration: 14s;
+        }
+        .bolhas span:nth-child(5) {
+            left: 65%;
+            animation-duration: 16s;
+        }
+        .bolhas span:nth-child(6) {
+            left: 75%;
+            width: 22px;
+            height: 22px;
+            animation-duration: 13s;
+        }
+        .bolhas span:nth-child(7) {
+            left: 85%;
+            animation-duration: 19s;
+        }
+        .bolhas span:nth-child(8) {
+            left: 95%;
+            width: 18px;
+            height: 18px;
+            animation-duration: 17s;
+        }
+        .bolhas span:nth-child(9) {
+            left: 5%;
+            animation-duration: 15s;
+        }
+        .bolhas span:nth-child(10) {
+            left: 40%;
+            width: 24px;
+            height: 24px;
+            animation-duration: 20s;
+        }
+
+@keyframes subir {
+            0% {
+                transform: translateY(0);
+                opacity: 1;
+            }
+            100% {
+                transform: translateY(-1200px);
+                opacity: 0;
+            }
+        }
+           
+    .footer {
+margin-top: 30px;
+      text-align: center;
+      font-size: 0.7em;
+      color: #5E5E5E;
+    }
+    </style>
+    <body>
+
+        <h3>Configurações</h3>
+        </header>
+        <div class="du">
+
+            <a href="#">¤- Configuração</a>
+            <a href="perfil3.html">¤- Perfil</a>
+            <a href="#">¤- Perfil Professional</a>
+            <a href="#">¤- Localização Usuarios</a>
+            <a href="#">¤- Segurança de Conta</a>
+            <a href="#">¤- Contribuição</a>
+            <a href="sug.html">¤- Sugestões</a>
+            <a href="#">¤- Perspectiva</a>
+            <a href="#">¤- Visão Geral</a>
+            <a href="#">¤- Projectos</a>
+            <a href="#">¤- Parcerias</a>
+            <a href="#">¤- Turbo</a>
+            <a href="privacidade.html">¤- Privacidade</a>
+            <a href="ajuda.html">¤- Ajuda</a>
+            <a href="sobreluvita.html">¤- Sobre</a>
+            <br>
+            <button id="logout-button">Terminar Sessão</button>
+        </div>
+        <div class="bolhas">
+            <span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span>
+        </div>
+    </body>
+
+
+<div class="footer">
+      &copy; 2025 LuVita. Todos os direitos reservados.
+    </div>
+
+
+    <script>
+
+        // Garante que o botão só será configurado após o DOM estar carregado
+        window.addEventListener('DOMContentLoaded', () => {
+            const logoutBtn = document.getElementById('logout-button');
+
+            if (logoutBtn) {
+                logoutBtn.addEventListener('click', () => {
+                    // ✅ Remove dados do localStorage
+                    localStorage.removeItem("perfilUsuario");
+                    localStorage.removeItem("destinatario");
+
+                    // ✅ Se estiver usando Firebase Auth
+                    if (typeof firebase !== "undefined" && firebase.auth) {
+                        firebase.auth().signOut().then(() => {
+                            window.location.href = "login.html"; // Altere se seu login tiver outro nome
+                        }).catch((error) => {
+                            console.error("Erro ao terminar sessão:", error);
+                            alert("Erro ao terminar sessão.");
+                        });
+                    } else {
+                        // ✅ Sem Firebase Auth, só redireciona
+                        window.location.href = "index.html";
+                    }
+                });
+            } else {
+                console.warn("Botão de logout não encontrado no HTML.");
+            }
+        });
+
+    </script>
